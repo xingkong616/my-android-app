@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理八年级上册 - 第3～5章练习题</title>
+<style>
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "微软雅黑", "Microsoft YaHei", Arial, sans-serif;
+    line-height: 1.7;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4ecf5 100%);
+    color: #2c3e50;
+    padding: 20px;
+  }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1.title {
+    text-align: center;
+    color: #1a3d6d;
+    padding: 20px 0;
+    border-bottom: 3px solid #4a90e2;
+    margin-bottom: 10px;
+    font-size: 28px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #6c7a89;
+    font-style: italic;
+    margin-bottom: 30px;
+  }
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .toolbar button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s;
+  }
+  .btn-show { background: #27ae60; color: #fff; }
+  .btn-show:hover { background: #1e8449; }
+  .btn-hide { background: #e74c3c; color: #fff; }
+  .btn-hide:hover { background: #c0392b; }
+  .btn-toggle { background: #f39c12; color: #fff; }
+  .btn-toggle:hover { background: #d68910; }
+  .btn-reset { background: #95a5a6; color: #fff; }
+  .btn-reset:hover { background: #7f8c8d; }
+  .toolbar .stats {
+    margin-left: auto;
+    color: #34495e;
+    font-weight: bold;
+  }
+  .chapter {
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  h2.chapter-title {
+    background: linear-gradient(135deg, #4a90e2, #2c5fa3);
+    color: #fff;
+    padding: 14px 22px;
+    font-size: 22px;
+  }
+  h3.section-title {
+    background: #eaf2fb;
+    color: #1a3d6d;
+    padding: 10px 22px;
+    font-size: 18px;
+    border-left: 5px solid #4a90e2;
+    margin-top: 10px;
+  }
+  h4.type-title {
+    color: #d35400;
+    padding: 8px 22px;
+    font-size: 16px;
+    background: #fef5e7;
+    border-bottom: 1px dashed #f39c12;
+  }
+  .question {
+    padding: 12px 22px;
+    border-bottom: 1px solid #ecf0f1;
+    transition: background 0.2s;
+  }
+  .question:hover { background: #f8fbff; }
+  .question.answered { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .question.wrong { background: #fdecea; border-left: 3px solid #e74c3c; }
+  .q-stem {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .q-stem .q-num {
+    color: #4a90e2;
+    margin-right: 6px;
+  }
+  .options { padding-left: 20px; }
+  .options label {
+    display: block;
+    padding: 4px 8px;
+    margin: 3px 0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .options label:hover { background: #eaf2fb; }
+  .options input[type="radio"] {
+    margin-right: 6px;
+    cursor: pointer;
+  }
+  .options label.correct {
+    background: #d5f4e6;
+    color: #1e7e34;
+    font-weight: bold;
+  }
+  .options label.incorrect {
+    background: #fadbd8;
+    color: #c0392b;
+  }
+  .fill-blank {
+    margin: 8px 0 0 20px;
+  }
+  .fill-blank .blank-input {
+    border: none;
+    border-bottom: 2px solid #4a90e2;
+    background: #f8fbff;
+    padding: 4px 8px;
+    font-size: 15px;
+    font-family: inherit;
+    min-width: 100px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .fill-blank .blank-input:focus {
+    outline: none;
+    background: #fff;
+    border-bottom-color: #f39c12;
+  }
+  .fill-blank .blank-input.correct {
+    background: #d5f4e6;
+    border-bottom-color: #27ae60;
+    color: #1e7e34;
+  }
+  .fill-blank .blank-input.wrong {
+    background: #fadbd8;
+    border-bottom-color: #e74c3c;
+    color: #c0392b;
+  }
+  .check-btn {
+    background: #4a90e2;
+    color: #fff;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-left: 12px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .check-btn:hover { background: #2c5fa3; }
+  .answer {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #eafaf1;
+    border-left: 3px solid #27ae60;
+    border-radius: 4px;
+    color: #1e7e34;
+    font-weight: bold;
+    display: none;
+  }
+  .answer.show { display: block; }
+  .footer {
+    text-align: center;
+    color: #95a5a6;
+    margin-top: 30px;
+    padding: 20px;
+    font-size: 14px;
+  }
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    h1.title { font-size: 22px; }
+    h2.chapter-title { font-size: 18px; padding: 12px 16px; }
+    h3.section-title { font-size: 16px; padding: 8px 16px; }
+    .question { padding: 10px 14px; }
+  }
+
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title">物理八年级上册 - 第3～5章练习题</h1>
+  <p class="subtitle">第3章 光 · 第4章 物态变化 · 第5章 质量与密度（17 节，每节 5 道选择题 + 5 道填空题）</p>
+  <div class="toolbar">
+    <button class="btn-show" onclick="showAllAnswers()">显示全部答案</button>
+    <button class="btn-hide" onclick="hideAllAnswers()">隐藏全部答案</button>
+    <button class="btn-toggle" onclick="toggleAllAnswers()">切换答案显示</button>
+    <button class="btn-reset" onclick="resetAll()">重置答题</button>
+    <span class="stats">已答题: <span id="answeredCount">0</span> / <span id="totalCount">0</span></span>
+  </div>
+  <div id="quizContainer"></div>
+  <div class="footer">—— 第 3 ～ 5 章完 ——</div>
+</div>
+
+<script>
+const quizData = [
+{
+    chapter: "第 3 章 光",
+    sections: [
+      {
+        title: "第 3.1 节  光的传播与色散",
+        choices: [
+          { stem: "下列关于光的传播，说法正确的是",
+            options: [
+              "光在任何情况下都沿直线传播",
+              "光在同种均匀介质中沿直线传播",
+              "光在水中沿曲线传播",
+              "光在玻璃中不沿直线传播"
+            ],
+            answer: "B"
+          },
+          { stem: "光在真空中的传播速度是",
+            options: ["340 m/s", "3×10⁵ m/s", "3×10⁸ m/s", "3×10⁶ m/s"],
+            answer: "C"
+          },
+          { stem: "下列现象中，不能用光的直线传播来解释的是",
+            options: ["日食的形成", "月食的形成", "小孔成像", "水中的倒影"],
+            answer: "D"
+          },
+          { stem: "太阳光通过三棱镜后被分解成各种颜色的光，这种现象叫做",
+            options: ["光的反射", "光的折射", "光的色散", "光的直线传播"],
+            answer: "C"
+          },
+          { stem: "下列属于光的三原色的是",
+            options: ["红、黄、蓝", "红、绿、蓝", "品红、黄、青", "橙、绿、紫"],
+            answer: "B"
+          }
+        ],
+        fills: [
+          { text: "光在______介质中是沿直线传播的。", answer: "同种均匀" },
+          { text: "光在真空中的传播速度约为______m/s，光在不同介质中的传播速度______（选填「相同」或「不同」）。", answer: "3×10⁸；不同" },
+          { text: "光的三原色是______、______和______，颜料的三原色是______、______和______。", answer: "红；绿；蓝；红；黄；蓝" },
+          { text: "透明物体的颜色是由它______的色光决定的，不透明物体的颜色是由它______的色光决定的。", answer: "透过；反射" },
+          { text: "彩虹是由于太阳光经过空气中的小水滴发生______而形成的。", answer: "色散" }
+        ]
+      },
+      {
+        title: "第 3.2 节  光的反射定律",
+        choices: [
+          { stem: "一束光垂直射到平面镜上时，反射角为",
+            options: ["0°", "30°", "45°", "90°"],
+            answer: "A"
+          },
+          { stem: "入射光线与镜面的夹角为 30°，则反射角为",
+            options: ["30°", "60°", "90°", "120°"],
+            answer: "B"
+          },
+          { stem: "下列现象中，属于光的反射现象的是",
+            options: ["小孔成像", "影子", "平静湖面倒映出岸上的景物", "海市蜃楼"],
+            answer: "C"
+          },
+          { stem: "关于光的反射，下列说法错误的是",
+            options: [
+              "反射光线、入射光线和法线在同一平面内",
+              "反射光线和入射光线分居法线两侧",
+              "反射角等于入射角",
+              "光发生反射时，光路不可逆"
+            ],
+            answer: "D"
+          },
+          { stem: "雨后夜晚，地面上出现一滩水，月光照到水面上发生反射，看到水中的月亮是",
+            options: [
+              "月亮的虚像，比月亮离地面近",
+              "月亮的实像",
+              "月亮的虚像，与月亮等大",
+              "月亮的虚像，比月亮大"
+            ],
+            answer: "C"
+          }
+        ],
+        fills: [
+          { text: "光的反射定律：反射光线、入射光线和法线在______内；反射光线和入射光线分居______两侧；反射角______入射角。", answer: "同一平面；法线；等于" },
+          { text: "入射角为 0° 时，反射光线与入射光线的夹角为______°。", answer: "0" },
+          { text: "镜面反射和漫反射都______（选填「遵守」或「不遵守」）光的反射定律。", answer: "遵守" },
+          { text: "光反射时，光路是______的。", answer: "可逆" },
+          { text: "反射光线和入射光线的夹角为 80°，则入射角为______°，入射光线与镜面的夹角为______°。", answer: "40；50" }
+        ]
+      },
+      {
+        title: "第 3.3 节  平面镜成像",
+        choices: [
+          { stem: "小芳站在平面镜前 1.5 m 处，她在镜中的像到平面镜的距离为",
+            options: ["1.5 m", "3 m", "0.75 m", "0 m"],
+            answer: "A"
+          },
+          { stem: "关于平面镜成像，下列说法正确的是",
+            options: ["所成的像是实像", "像与物的大小相等", "像比物大", "像比物小"],
+            answer: "B"
+          },
+          { stem: "小华从平面镜中看到身后墙上的时钟显示 9:15，则实际时间是",
+            options: ["9:15", "3:45", "9:45", "3:15"],
+            answer: "B"
+          },
+          { stem: "在「探究平面镜成像特点」的实验中，用玻璃板代替平面镜，主要是为了",
+            options: [
+              "使像更清晰",
+              "便于确定像的位置",
+              "减小误差",
+              "使蜡烛成像更亮"
+            ],
+            answer: "B"
+          },
+          { stem: "关于平面镜所成的像，下列说法正确的是",
+            options: [
+              "像与物到镜面的距离相等",
+              "像与物左右颠倒",
+              "像是虚像",
+              "以上说法都正确"
+            ],
+            answer: "D"
+          }
+        ],
+        fills: [
+          { text: "平面镜所成的像与物体的大小______，像与物到镜面的距离______，像与物的连线与镜面______，平面镜成的是______像。", answer: "相等；相等；垂直；虚" },
+          { text: "一只鸟在平静湖面上方 5 m 处飞行，水深 2 m，则鸟的像到水面的距离为______m。", answer: "5" },
+          { text: "身高 1.6 m 的同学站在平面镜前 2 m 处，他的像的高度是______m，当他向镜子走近 0.5 m 时，他的像到镜面的距离是______m。", answer: "1.6；1.5" },
+          { text: "在「探究平面镜成像特点」的实验中，应选用______（选填「厚」或「薄」）玻璃板，并且环境光线应适当______（选填「亮」或「暗」）一些。", answer: "薄；暗" },
+          { text: "检查视力时，视力表上字母 E 的像在视网膜上所成的像是______像（选填「虚」或「实」），相当于______镜成像。", answer: "实；凸透" }
+        ]
+      },
+      {
+        title: "第 3.4 节  光的折射",
+        choices: [
+          { stem: "下列现象中，属于光的折射现象的是",
+            options: [
+              "平静的水面倒映出岸上的树",
+              "插入水中的筷子看起来向上弯折",
+              "日食的形成",
+              "小孔成像"
+            ],
+            answer: "B"
+          },
+          { stem: "光从空气斜射入水中时",
+            options: [
+              "折射角大于入射角",
+              "折射角等于入射角",
+              "折射角小于入射角",
+              "光线不发生偏折"
+            ],
+            answer: "C"
+          },
+          { stem: "光从空气垂直射入水中时",
+            options: [
+              "传播方向不变",
+              "传播方向改变",
+              "传播速度变大",
+              "折射光线向法线偏折"
+            ],
+            answer: "A"
+          },
+          { stem: "清澈的池水看起来比实际的深度要浅，这是由于",
+            options: ["光的直线传播", "光的反射", "光的折射", "光的色散"],
+            answer: "C"
+          },
+          { stem: "渔民叉鱼时，应当瞄准所看到鱼的",
+            options: ["上方", "下方", "正前方", "原位置"],
+            answer: "B"
+          }
+        ],
+        fills: [
+          { text: "光从一种介质斜射入另一种介质时，传播方向会发生______，这种现象叫做光的折射。", answer: "改变（偏折）" },
+          { text: "光从空气斜射入水中时，折射角______（选填「大于」「小于」或「等于」）入射角。", answer: "小于" },
+          { text: "光从空气斜射入玻璃时，折射光线和入射光线分居______两侧，且折射角______入射角。", answer: "法线；小于" },
+          { text: "池水看起来比实际______（选填「深」或「浅」），鱼的位置看起来比实际位置______（选填「高」或「低」）。", answer: "浅；高" },
+          { text: "在反射和折射中，光路都是______的。", answer: "可逆" }
+        ]
+      },
+      {
+        title: "第 3.5 节  奇妙的透镜",
+        choices: [
+          { stem: "下列光学元件中，对光有会聚作用的是",
+            options: ["凸透镜", "凹透镜", "平面镜", "三棱镜"],
+            answer: "A"
+          },
+          { stem: "关于凸透镜和凹透镜，下列说法正确的是",
+            options: [
+              "凸透镜中间薄、边缘厚",
+              "凹透镜中间厚、边缘薄",
+              "凸透镜对光有会聚作用，凹透镜对光有发散作用",
+              "凸透镜和凹透镜都对光有会聚作用"
+            ],
+            answer: "C"
+          },
+          { stem: "一束平行于主光轴的光线通过凸透镜后，会聚在主光轴上一点，这一点叫做凸透镜的",
+            options: ["光心", "焦点", "焦距", "主光轴"],
+            answer: "B"
+          },
+          { stem: "关于凸透镜焦距，下列说法正确的是",
+            options: [
+              "焦距越短，对光的会聚作用越弱",
+              "焦距越长，对光的会聚作用越强",
+              "焦距越短，对光的会聚作用越强",
+              "焦距与会聚作用无关"
+            ],
+            answer: "C"
+          },
+          { stem: "一束平行光射向凹透镜后，折射光线将",
+            options: [
+              "会聚于一点",
+              "保持平行",
+              "变得发散，其反向延长线经过虚焦点",
+              "沿原方向继续传播"
+            ],
+            answer: "C"
+          }
+        ],
+        fills: [
+          { text: "中间厚、边缘薄的透镜叫做______透镜，它对光有______作用；中间薄、边缘厚的透镜叫做______透镜，它对光有______作用。", answer: "凸；会聚；凹；发散" },
+          { text: "凸透镜对光有会聚作用，平行于主光轴的光线经凸透镜后会聚于______。", answer: "焦点" },
+          { text: "从光心到焦点的距离叫做______，用符号______表示。", answer: "焦距；f" },
+          { text: "凸透镜有两个实焦点，分别位于透镜的______侧。", answer: "两" },
+          { text: "光心是透镜的中心，凡是经过光心的光线，传播方向______。", answer: "不变" }
+        ]
+      },
+      {
+        title: "第 3.6 节  凸透镜成像规律",
+        choices: [
+          { stem: "物体放在凸透镜前 2 倍焦距以外时，在光屏上得到一个",
+            options: [
+              "正立、放大的虚像",
+              "倒立、缩小的实像",
+              "倒立、放大的实像",
+              "正立、缩小的实像"
+            ],
+            answer: "B"
+          },
+          { stem: "物体放在凸透镜前 1 倍焦距和 2 倍焦距之间时，在光屏上得到一个",
+            options: [
+              "倒立、缩小的实像",
+              "倒立、放大的实像",
+              "正立、放大的虚像",
+              "正立、缩小的实像"
+            ],
+            answer: "B"
+          },
+          { stem: "用放大镜观察细小物体时，物体应放在",
+            options: [
+              "1 倍焦距以外",
+              "1 倍焦距和 2 倍焦距之间",
+              "2 倍焦距以外",
+              "1 倍焦距以内"
+            ],
+            answer: "D"
+          },
+          { stem: "照相机成像是利用了凸透镜成______的原理",
+            options: [
+              "正立放大的虚像",
+              "倒立放大的实像",
+              "倒立缩小的实像",
+              "正立等大的实像"
+            ],
+            answer: "C"
+          },
+          { stem: "物体从凸透镜前 2 倍焦距处向焦点移动时，像的大小变化情况是",
+            options: ["逐渐变小", "逐渐变大", "先变小后变大", "大小不变"],
+            answer: "B"
+          }
+        ],
+        fills: [
+          { text: "凸透镜成像规律：当 u > 2f 时，成______、______的实像，应用是______。", answer: "倒立；缩小；照相机" },
+          { text: "当 f < u < 2f 时，成______、______的实像，应用是______。", answer: "倒立；放大；投影仪" },
+          { text: "当 u < f 时，成______、______的虚像，应用是______。", answer: "正立；放大；放大镜" },
+          { text: "当 u = 2f 时，成______、______的实像，此时物距 u 与像距 v 的关系是______。", answer: "倒立；等大；u = v = 2f" },
+          { text: "当 u = f 时，凸透镜______（选填「能」或「不能」）成像。", answer: "不能" }
+        ]
+      },
+      {
+        title: "第 3.7 节  眼睛与光学仪器",
+        choices: [
+          { stem: "下列关于近视眼的说法，正确的是",
+            options: [
+              "近视眼看不清近处的物体",
+              "近视眼的像成在视网膜的后方",
+              "近视眼应佩戴凹透镜矫正",
+              "近视眼应佩戴凸透镜矫正"
+            ],
+            answer: "C"
+          },
+          { stem: "远视眼的成因是",
+            options: [
+              "晶状体太厚，折光能力太弱",
+              "晶状体太薄，折光能力太弱",
+              "晶状体太厚，折光能力太强",
+              "以上都不对"
+            ],
+            answer: "B"
+          },
+          { stem: "正常眼睛的明视距离大约是",
+            options: ["10 cm", "15 cm", "25 cm", "50 cm"],
+            answer: "C"
+          },
+          { stem: "显微镜的物镜和目镜所成的像分别是",
+            options: ["虚像、实像", "实像、虚像", "实像、实像", "虚像、虚像"],
+            answer: "B"
+          },
+          { stem: "下列仪器中，利用凸透镜成倒立、放大实像原理工作的是",
+            options: ["照相机", "投影仪", "放大镜", "近视眼镜"],
+            answer: "B"
+          }
+        ],
+        fills: [
+          { text: "正常眼睛的晶状体相当于一个______，视网膜相当于______。", answer: "凸透镜；光屏" },
+          { text: "近视眼的像成在视网膜的______方，应佩戴______透镜矫正；远视眼的像成在视网膜的______方，应佩戴______透镜矫正。", answer: "前；凹；后；凸" },
+          { text: "显微镜由两组凸透镜组成，物镜相当于______的镜头，目镜相当于______。", answer: "投影仪；放大镜" },
+          { text: "望远镜的物镜使远处物体成______（选填「放大」或「缩小」）的实像，目镜再把这个像放大。", answer: "缩小" },
+          { text: "正常人眼看物体最清晰而又不疲劳的距离叫做______，大约为______cm。", answer: "明视距离；25" }
+        ]
+      }
+    ]
+  },
+{
+    chapter: "第 4 章 物态变化",
+    sections: [
+      {
+        title: "第 4.1 节  从全球变暖谈起",
+        choices: [
+          { stem: "关于温度和温度计，下列说法正确的是",
+            options: [
+              "0°C 表示物体没有温度",
+              "体温计的量程是 0~100°C",
+              "常用温度计是根据液体热胀冷缩的性质制成的",
+              "实验室温度计可以离开被测液体读数"
+            ],
+            answer: "C"
+          },
+          { stem: "下列温度中，最接近 25°C 的是",
+            options: [
+              "冰水混合物的温度",
+              "让人感觉舒适的室内温度",
+              "健康人的正常体温",
+              "标准大气压下沸水的温度"
+            ],
+            answer: "B"
+          },
+          { stem: "使用温度计测量液体温度时，下列操作正确的是",
+            options: [
+              "将温度计的玻璃泡紧贴容器底或容器壁",
+              "读数时将温度计从液体中取出",
+              "视线与温度计内液柱的上表面相平",
+              "将温度计放入液体中立即读数"
+            ],
+            answer: "C"
+          },
+          { stem: "体温计的精确度比普通温度计高，主要原因是",
+            options: [
+              "体温计的玻璃泡容积小",
+              "体温计的玻璃管内径细",
+              "体温计比普通温度计长",
+              "体温计的内装液体是水银"
+            ],
+            answer: "B"
+          },
+          { stem: "在标准大气压下，下列说法正确的是",
+            options: [
+              "冰水混合物的温度为 0 K",
+              "沸水的温度为 100°C",
+              "健康人体温为 35°C",
+              "北方冬季最低温度可达 100°C"
+            ],
+            answer: "B"
+          }
+        ],
+        fills: [
+          { text: "温度是表示物体______的物理量。", answer: "冷热程度" },
+          { text: "常用温度计是根据液体的______性质制成的。", answer: "热胀冷缩" },
+          { text: "摄氏温度规定：标准大气压下冰水混合物的温度为______°C，沸水的温度为______°C。", answer: "0；100" },
+          { text: "体温计的量程是______°C 到______°C，分度值是______°C。", answer: "35；42；0.1" },
+          { text: "使用温度计测液体温度时，玻璃泡要______（选填「全部浸入」或「部分浸入」）被测液体中，待示数稳定后再读数，读数时玻璃泡______（选填「能」或「不能」）离开被测液体。", answer: "全部浸入；不能" }
+        ]
+      },
+      {
+        title: "第 4.2 节  汽化和液化",
+        choices: [
+          { stem: "下列现象中，属于液化的是",
+            options: [
+              "春天，冰雪消融",
+              "夏天，湿衣服变干",
+              "秋天，草叶上出现露珠",
+              "冬天，湖水结冰"
+            ],
+            answer: "C"
+          },
+          { stem: "关于蒸发和沸腾，下列说法正确的是",
+            options: [
+              "蒸发和沸腾都需要吸热",
+              "蒸发和沸腾都需要放热",
+              "蒸发需要放热，沸腾需要吸热",
+              "蒸发和沸腾都不需要吸热"
+            ],
+            answer: "A"
+          },
+          { stem: "下列措施中，能加快液体蒸发的是",
+            options: [
+              "将湿衣服晾在通风向阳处",
+              "将水果放入冰箱",
+              "用塑料袋装蔬菜",
+              "用瓶子装酒精并盖紧瓶盖"
+            ],
+            answer: "A"
+          },
+          { stem: "关于液体沸腾的特点，下列说法正确的是",
+            options: [
+              "沸腾在液体表面发生",
+              "沸腾在液体内部和表面同时发生",
+              "沸腾时吸热但温度降低",
+              "沸腾不需要吸热"
+            ],
+            answer: "B"
+          },
+          { stem: "使气体液化的两种方法是",
+            options: [
+              "降低温度和压缩体积",
+              "升高温度和压缩体积",
+              "降低温度和增大体积",
+              "升高温度和增大体积"
+            ],
+            answer: "A"
+          }
+        ],
+        fills: [
+          { text: "汽化有两种方式：______和______；汽化过程要______热。", answer: "蒸发；沸腾；吸" },
+          { text: "蒸发是在液体______发生的、______的汽化现象；沸腾是在液体______和______同时发生的______汽化现象。", answer: "表面；缓慢；内部；表面；剧烈" },
+          { text: "液体沸腾的条件：①温度达到______；②需要______热量。", answer: "沸点；持续吸收" },
+          { text: "液化是汽化的______过程，液化要______热。", answer: "逆；放" },
+          { text: "烧开水时，壶嘴冒出的「白气」实际上是______，它是水蒸气遇冷______形成的小水珠。", answer: "小水珠；液化" }
+        ]
+      },
+      {
+        title: "第 4.3 节  熔化和凝固",
+        choices: [
+          { stem: "下列物质中，属于晶体的是",
+            options: ["玻璃", "沥青", "海波", "松香"],
+            answer: "C"
+          },
+          { stem: "晶体和非晶体的重要区别是",
+            options: [
+              "晶体是固体，非晶体是液体",
+              "晶体有熔点，非晶体没有熔点",
+              "晶体透明，非晶体不透明",
+              "晶体有颜色，非晶体没有颜色"
+            ],
+            answer: "B"
+          },
+          { stem: "晶体在熔化过程中",
+            options: ["温度不断升高", "温度保持不变", "温度不断降低", "先升高后降低"],
+            answer: "B"
+          },
+          { stem: "关于凝固，下列说法正确的是",
+            options: [
+              "凝固过程要吸热",
+              "凝固过程要放热",
+              "所有液体凝固时温度都保持不变",
+              "非晶体凝固时温度保持不变"
+            ],
+            answer: "B"
+          },
+          { stem: "在标准大气压下，冰的熔点是 0°C，则冰水混合物的温度为",
+            options: ["低于 0°C", "高于 0°C", "等于 0°C", "无法确定"],
+            answer: "C"
+          }
+        ],
+        fills: [
+          { text: "物质从______态变为______态叫做熔化，熔化要______热；物质从______态变为______态叫做凝固，凝固要______热。", answer: "固；液；吸；液；固；放" },
+          { text: "晶体有______的熔点，非晶体没有______的熔点。", answer: "固定；固定" },
+          { text: "晶体熔化的条件：①温度达到______；②需要______热量。", answer: "熔点；持续吸收" },
+          { text: "同一种晶体的熔点和它的凝固点______。", answer: "相同" },
+          { text: "在北方寒冷的冬天，常用酒精和水的混合物作为温度计的测温物质，是因为酒精和水的凝固点比水的凝固点______（选填「高」或「低」）。", answer: "低" }
+        ]
+      },
+      {
+        title: "第 4.4 节  升华和凝华",
+        choices: [
+          { stem: "下列现象中，属于升华的是",
+            options: [
+              "冬天，室外冰冻的衣服变干",
+              "夏天，冰箱拿出的饮料瓶外壁出现水珠",
+              "清晨，树叶上出现露珠",
+              "冬天，河面结冰"
+            ],
+            answer: "A"
+          },
+          { stem: "下列现象中，属于凝华的是",
+            options: [
+              "冬天，窗户玻璃上出现冰花",
+              "冬天，湖水结冰",
+              "冬天，呼出「白气」",
+              "冬天，雪堆变大了"
+            ],
+            answer: "A"
+          },
+          { stem: "关于升华和凝华，下列说法正确的是",
+            options: [
+              "升华是固态变为液态",
+              "凝华是气态变为液态",
+              "升华吸热，凝华放热",
+              "升华放热，凝华吸热"
+            ],
+            answer: "C"
+          },
+          { stem: "用久的白炽灯泡内壁会变黑，这一过程包含的物态变化是",
+            options: [
+              "先升华后凝华",
+              "先凝华后升华",
+              "先汽化后液化",
+              "先液化后汽化"
+            ],
+            answer: "A"
+          },
+          { stem: "利用干冰（固态二氧化碳）进行人工降雨的原理是",
+            options: [
+              "干冰升华吸热，使水蒸气液化或凝华",
+              "干冰升华放热，使水蒸气液化",
+              "干冰熔化吸热，使水蒸气凝固",
+              "干冰凝华放热，使水蒸气汽化"
+            ],
+            answer: "A"
+          }
+        ],
+        fills: [
+          { text: "物质由______态直接变为______态叫做升华，升华要______热；物质由______态直接变为______态叫做凝华，凝华要______热。", answer: "固；气；吸；气；固；放" },
+          { text: "樟脑丸（卫生球）放久了会变小，是因为樟脑丸发生了______；冬天树枝上出现的「雾凇」是______现象。", answer: "升华；凝华" },
+          { text: "用久的白炽灯泡内壁变黑，发生的物态变化过程是：灯丝（钨）先______（选填「升华」或「凝华」）变成气体，遇到温度较低的玻璃内壁再______（选填「升华」或「凝华」）成固体。", answer: "升华；凝华" },
+          { text: "人工降雨时，向云层中播撒干冰，干冰______时吸收大量的热，使云中的水蒸气______成小冰晶或______成小水滴，从而形成降雨。", answer: "升华；凝华；液化" },
+          { text: "在「雪」「露」「雾」「霜」四种自然现象中，属于凝华形成的是______。", answer: "霜" }
+        ]
+      },
+      {
+        title: "第 4.5 节  水循环与水资源",
+        choices: [
+          { stem: "地球上水体中，海水约占",
+            options: ["3%", "31%", "69%", "97%"],
+            answer: "D"
+          },
+          { stem: "下列关于水资源的说法，错误的是",
+            options: [
+              "地球上淡水资源是有限的",
+              "水可以循环使用，所以水是取之不尽的",
+              "我国是水资源贫乏的国家",
+              "工业废水需要处理后才能排放"
+            ],
+            answer: "B"
+          },
+          { stem: "下列做法中，有利于节约用水的是",
+            options: [
+              "用流动的水冲洗汽车",
+              "将淘米水用来浇花",
+              "洗澡时让水一直流着",
+              "不关紧水龙头"
+            ],
+            answer: "B"
+          },
+          { stem: "下列水污染来源中，由农业造成的是",
+            options: [
+              "工业废水排放",
+              "生活污水排放",
+              "农药和化肥的不合理使用",
+              "生活垃圾倾倒"
+            ],
+            answer: "C"
+          },
+          { stem: "在水的三态变化中，属于吸热过程的是",
+            options: [
+              "熔化、液化、凝华",
+              "凝固、汽化、升华",
+              "熔化、汽化、升华",
+              "凝固、液化、凝华"
+            ],
+            answer: "C"
+          }
+        ],
+        fills: [
+          { text: "地球上的水主要以______、______、______三种状态存在，它们之间可以相互转化。", answer: "固态；液态；气态" },
+          { text: "海陆间大循环包括：海洋水蒸发→水汽输送到陆地上空→______→地表或地下径流→流回海洋。", answer: "降水" },
+          { text: "我国水资源在时间上的分布特点是：夏秋______，冬春______。", answer: "多；少" },
+          { text: "节约用水的措施：①农业上采用______灌溉；②工业上______用水；③生活中一水多用。", answer: "喷灌或滴灌；循环" },
+          { text: "保护水资源的措施：①防治______污染；②节约______；③加强水资源的管理。", answer: "水；用水" }
+        ]
+      }
+    ]
+  },
+{
+    chapter: "第 5 章 质量与密度",
+    sections: [
+      {
+        title: "第 5.1 节  物体的质量",
+        choices: [
+          { stem: "关于质量，下列说法正确的是",
+            options: [
+              "物体的质量随形状的改变而改变",
+              "物体的质量随状态的改变而改变",
+              "物体的质量随位置的改变而改变",
+              "质量是物体本身的一种属性，与形状、状态、位置无关"
+            ],
+            answer: "D"
+          },
+          { stem: "下列物体中，质量约为 50 g 的是",
+            options: ["一枚一元硬币", "一个鸡蛋", "一个中学生", "一辆小汽车"],
+            answer: "B"
+          },
+          { stem: "将一块冰熔化成水后，它的质量",
+            options: ["变大", "变小", "不变", "先变大后变小"],
+            answer: "C"
+          },
+          { stem: "使用托盘天平测量物体质量时，下列操作错误的是",
+            options: [
+              "将被测物体放在左盘，砝码放在右盘",
+              "用镊子夹取砝码",
+              "测量前调节平衡螺母使横梁平衡",
+              "测量时用手直接拿取砝码"
+            ],
+            answer: "D"
+          },
+          { stem: "某同学用托盘天平称量物体质量时，物体放在右盘，砝码放在左盘，他用了 50 g、20 g、10 g 砝码各一个，游码移到 1.2 g 处横梁平衡，则物体的实际质量是",
+            options: ["81.2 g", "78.8 g", "80 g", "82.4 g"],
+            answer: "B"
+          }
+        ],
+        fills: [
+          { text: "物体所含______的多少叫做质量，质量用字母______表示。", answer: "物质；m" },
+          { text: "质量的国际单位是______，符号是______；常用单位还有______、______、______。", answer: "千克；kg；吨(t)；克(g)；毫克(mg)" },
+          { text: "质量单位换算：1 t =______kg；1 kg =______g；1 g =______mg。", answer: "1 000；1 000；1 000" },
+          { text: "质量是物体的一种属性，它不随物体的______、______、______和温度的改变而改变。", answer: "形状；状态；位置" },
+          { text: "使用托盘天平时，应将天平放在______桌面上，游码移到标尺左端的______处，再调节______使横梁平衡。", answer: "水平；零刻度线；平衡螺母" }
+        ]
+      },
+      {
+        title: "第 5.2 节  物质的密度",
+        choices: [
+          { stem: "关于密度，下列说法正确的是",
+            options: [
+              "物质的密度与质量成正比",
+              "物质的密度与体积成反比",
+              "密度是物质的一种特性，与质量和体积无关",
+              "体积越大，物质的密度越小"
+            ],
+            answer: "C"
+          },
+          { stem: "一瓶氧气用去一半后，剩余氧气的密度",
+            options: ["变为原来的一半", "变为原来的两倍", "保持不变", "无法确定"],
+            answer: "A"
+          },
+          { stem: "两个质量相等的实心球，密度之比是 1:3，则它们的体积之比是",
+            options: ["1:1", "1:3", "3:1", "9:1"],
+            answer: "C"
+          },
+          { stem: "水的密度是 1.0×10³ kg/m³，表示的物理意义是",
+            options: [
+              "1 m³ 水的质量是 1.0×10³ kg",
+              "1 m³ 水的体积是 1.0×10³ m³",
+              "1 kg 水的体积是 1.0×10³ m³",
+              "1 kg 水的密度是 1.0×10³ kg/m³"
+            ],
+            answer: "A"
+          },
+          { stem: "能用来鉴别物质种类的物理量是",
+            options: ["质量", "体积", "密度", "重力"],
+            answer: "C"
+          }
+        ],
+        fills: [
+          { text: "某种物质______的质量叫做这种物质的密度。", answer: "单位体积" },
+          { text: "密度的公式是______，其中ρ表示______，m表示______，V表示______。", answer: "ρ = m/V；密度；质量；体积" },
+          { text: "密度的国际单位是______，符号是______；常用单位是______，符号是______。", answer: "千克每立方米；kg/m³；克每立方厘米；g/cm³" },
+          { text: "单位换算：1 g/cm³ =______kg/m³。", answer: "1 000" },
+          { text: "水在 4°C 时的密度是______kg/m³，合______g/cm³。", answer: "1.0×10³；1" }
+        ]
+      },
+      {
+        title: "第 5.3 节  密度知识的应用",
+        choices: [
+          { stem: "一个铜球质量为 89 g，体积为 30 cm³，已知铜的密度为 8.9 g/cm³，则该铜球",
+            options: ["一定是实心的", "一定是空心的", "可能是实心的", "无法判断"],
+            answer: "B"
+          },
+          { stem: "用天平和量筒测量液体密度的实验中，下列步骤必要的是",
+            options: [
+              "测量空量筒的质量",
+              "测量烧杯和液体的总质量，再测量剩余液体和烧杯的质量",
+              "用量筒直接测出液体的质量",
+              "将液体加热后测量"
+            ],
+            answer: "B"
+          },
+          { stem: "空瓶质量为 200 g，装满水后总质量为 700 g，装满另一种液体后总质量为 600 g，则该液体的密度为",
+            options: ["0.8 g/cm³", "0.6 g/cm³", "1.0 g/cm³", "1.2 g/cm³"],
+            answer: "A"
+          },
+          { stem: "甲、乙两种物质的质量之比为 1:2，体积之比为 1:4，则它们的密度之比为",
+            options: ["1:2", "2:1", "1:4", "4:1"],
+            answer: "B"
+          },
+          { stem: "在「测量金属块密度」的实验中，下列操作中会导致测量结果偏小的是",
+            options: [
+              "金属块放入量筒时溅出了水",
+              "金属块上沾有水",
+              "量筒中有少量水",
+              "读取量筒水面时视线仰视"
+            ],
+            answer: "A"
+          }
+        ],
+        fills: [
+          { text: "利用密度公式可以求物质的质量 m =______，也可以求物质的体积 V =______。", answer: "ρV；m/ρ" },
+          { text: "鉴别物质的方法：测出物体的______和______，计算出______，与密度表对照。", answer: "质量；体积；密度" },
+          { text: "一个铁球质量为 79 g，体积为 15 cm³（ρ铁 = 7.9 g/cm³），则该铁球是______的（选填「实心」或「空心」），空心部分体积为______cm³。", answer: "空心；5" },
+          { text: "测量液体密度的实验步骤：①用天平测出烧杯和液体的总质量 m₁；②将适量液体倒入______，读出体积 V；③用天平测出______和______的总质量 m₂；④液体密度 ρ =______。", answer: "量筒；烧杯；剩余液体；(m₁-m₂)/V" },
+          { text: "在「测量金属块密度」的实验中：先用天平测出金属块的质量为 m，再在量筒中倒入适量水，体积为 V₁，然后放入金属块，水面升到 V₂，则金属块密度 ρ =______。", answer: "m/(V₂-V₁)" }
+        ]
+      },
+      {
+        title: "第 5.4 节  物质的其他物理属性",
+        choices: [
+          { stem: "下列属性中，不属于物质的物理属性的是",
+            options: ["颜色", "状态", "味道", "密度"],
+            answer: "C"
+          },
+          { stem: "磁体能够吸引铁、钴、镍等物质，这表明这些物质具有",
+            options: ["导电性", "导热性", "磁性", "延展性"],
+            answer: "C"
+          },
+          { stem: "下列物质中，导电性能最好的是",
+            options: ["橡胶", "玻璃", "铜", "塑料"],
+            answer: "C"
+          },
+          { stem: "物质的硬度反映的是",
+            options: [
+              "物质的软硬程度",
+              "物质承受热量的本领",
+              "物质传导电流的能力",
+              "物质吸引其他物质的性质"
+            ],
+            answer: "A"
+          },
+          { stem: "关于物质属性，下列说法正确的是",
+            options: [
+              "不同物质具有相同的属性",
+              "物质的属性是固定不变的",
+              "物质的属性是鉴别物质的重要依据",
+              "物质的属性与状态无关"
+            ],
+            answer: "C"
+          }
+        ],
+        fills: [
+          { text: "物质的物理属性包括______、______、______、______、______、______等。", answer: "颜色；状态；气味；硬度；密度；导电性（答出合理属性即可）" },
+          { text: "物质的______是材料抵抗外力破坏的能力；物质的______是材料传导电流的能力。", answer: "硬度；导电性" },
+          { text: "具有______性的物体能够吸引铁、钴、镍等物质。", answer: "磁" },
+          { text: "铜是良好的______体；橡胶是良好的______体（选填「导」或「绝缘」）。", answer: "导；绝缘" },
+          { text: "不同物质具有不同的物理属性，物理属性是______物质的重要依据之一。", answer: "鉴别" }
+        ]
+      },
+      {
+        title: "第 5.5 节  新材料及其应用",
+        choices: [
+          { stem: "关于纳米材料，下列说法正确的是",
+            options: [
+              "纳米材料尺度在 1 mm 以上",
+              "纳米材料具有许多特殊的物理和化学性质",
+              "纳米材料与普通材料性质完全相同",
+              "纳米材料的研究与我们的生活无关"
+            ],
+            answer: "B"
+          },
+          { stem: "1 纳米等于",
+            options: ["10⁻³ m", "10⁻⁶ m", "10⁻⁹ m", "10⁻¹² m"],
+            answer: "C"
+          },
+          { stem: "关于超导材料，下列说法正确的是",
+            options: [
+              "超导材料在任何温度下电阻都为零",
+              "超导材料在温度降到某一特定温度以下时电阻为零",
+              "超导材料已大规模应用于日常生活",
+              "超导材料可以用来制作电炉丝"
+            ],
+            answer: "B"
+          },
+          { stem: "下列材料中，属于半导体材料的是",
+            options: ["铜", "硅", "橡胶", "陶瓷"],
+            answer: "B"
+          },
+          { stem: "下列应用中，利用半导体材料工作的是",
+            options: ["输电线", "电热水壶", "发光二极管", "保险丝"],
+            answer: "C"
+          }
+        ],
+        fills: [
+          { text: "纳米是长度单位，1 nm =______m。", answer: "10⁻⁹" },
+          { text: "纳米材料的尺度一般在______nm 到______nm 之间，具有许多特殊的物理和化学性质。", answer: "1；100" },
+          { text: "某些金属或合金，当温度降到某一特定温度以下时，电阻变为______，这种现象叫做______。", answer: "零；超导现象" },
+          { text: "半导体材料的导电性能介于______和______之间，常见的半导体材料有______和______。", answer: "导体；绝缘体；硅；锗" },
+          { text: "新型材料在生产生活中应用越来越广泛，例如：超导材料可以制造______输电线、______等。", answer: "无损耗；磁悬浮列车" }
+        ]
+      }
+    ]
+  }
+];
+
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  let html = '';
+  let qNum = 0;
+  let fillNum = 0;
+
+  quizData.forEach(chap => {
+    html += `<div class="chapter"><h2 class="chapter-title">${escapeHtml(chap.chapter)}</h2>`;
+    chap.sections.forEach(sec => {
+      html += `<h3 class="section-title">${escapeHtml(sec.title)}</h3>`;
+      html += `<h4 class="type-title">一、选择题</h4>`;
+      sec.choices.forEach((q, idx) => {
+        qNum++;
+        const id = `choice-${qNum}`;
+        html += `<div class="question" id="${id}">`;
+        html += `<div class="q-stem"><span class="q-num">${idx + 1}.</span>${escapeHtml(q.stem)}（　　）</div>`;
+        html += `<div class="options">`;
+        const letters = ['A', 'B', 'C', 'D'];
+        q.options.forEach((opt, i) => {
+          html += `<label data-letter="${letters[i]}">
+            <input type="radio" name="${id}" value="${letters[i]}" onchange="checkChoice('${id}', '${q.answer}', this)">
+            ${letters[i]}. ${escapeHtml(opt)}
+          </label>`;
+        });
+        html += `</div>`;
+        html += `<button class="check-btn" onclick="document.getElementById('${id}-ans').classList.add('show')">查看答案</button>`;
+        html += `<div class="answer" id="${id}-ans">${escapeHtml(q.answer)}</div>`;
+        html += `</div>`;
+      });
+      html += `<h4 class="type-title">二、填空题</h4>`;
+      sec.fills.forEach((f, idx) => {
+        fillNum++;
+        const id = `fill-${fillNum}`;
+        const blanks = (f.text.match(/_{2,}/g) || []).length;
+        html += `<div class="question" id="${id}">`;
+        html += `<div class="q-stem"><span class="q-num">${idx + 1}.</span>${formatFillText(f.text)}</div>`;
+        html += `<div class="fill-blank">`;
+        const answers = f.answer.split('；');
+        for (let i = 0; i < blanks; i++) {
+          const ans = (answers[i] || '').trim();
+          html += `<input type="text" class="blank-input" data-ans="${escapeHtml(ans)}" onblur="checkBlank(this)" placeholder="空${i+1}">`;
+          if (i < blanks - 1) html += '、';
+        }
+        html += `<button class="check-btn" onclick="checkFillQuestion('${id}')">验证</button>`;
+        html += `<button class="check-btn" onclick="document.getElementById('${id}-ans').classList.add('show')">查看答案</button>`;
+        html += `</div>`;
+        html += `<div class="answer" id="${id}-ans">${escapeHtml(f.answer)}</div>`;
+        html += `</div>`;
+      });
+    });
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+  totalCount = qNum + fillNum;
+  document.getElementById('totalCount').textContent = totalCount;
+}
+
+function formatFillText(text) {
+  // 把所有连续 2+ 个下划线替换为 ______，保持其他文字不变
+  return escapeHtml(text);
+}
+
+function checkChoice(id, correct, input) {
+  const qEl = document.getElementById(id);
+  const labels = qEl.querySelectorAll('.options label');
+  labels.forEach(l => {
+    l.classList.remove('correct', 'incorrect');
+  });
+  if (input.value === correct) {
+    input.parentElement.classList.add('correct');
+    qEl.classList.add('answered');
+    qEl.classList.remove('wrong');
+  } else {
+    input.parentElement.classList.add('incorrect');
+    labels.forEach(l => {
+      if (l.getAttribute('data-letter') === correct) l.classList.add('correct');
+    });
+    qEl.classList.add('wrong');
+    qEl.classList.remove('answered');
+  }
+  updateStats();
+}
+
+function checkBlank(input) {
+  const userAns = input.value.trim();
+  const correctAns = input.getAttribute('data-ans').trim();
+  input.classList.remove('correct', 'wrong');
+  if (userAns === '') return;
+  if (userAns === correctAns) {
+    input.classList.add('correct');
+  } else {
+    input.classList.add('wrong');
+  }
+  updateStats();
+}
+
+function checkFillQuestion(id) {
+  const qEl = document.getElementById(id);
+  const inputs = qEl.querySelectorAll('.blank-input');
+  inputs.forEach(inp => checkBlank(inp));
+}
+
+function showAllAnswers() {
+  document.querySelectorAll('.answer').forEach(a => a.classList.add('show'));
+}
+function hideAllAnswers() {
+  document.querySelectorAll('.answer').forEach(a => a.classList.remove('show'));
+}
+function toggleAllAnswers() {
+  const answers = document.querySelectorAll('.answer');
+  const allShown = Array.from(answers).every(a => a.classList.contains('show'));
+  answers.forEach(a => a.classList.toggle('show', !allShown));
+}
+function resetAll() {
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('.blank-input').forEach(i => {
+    i.value = '';
+    i.classList.remove('correct', 'wrong');
+  });
+  document.querySelectorAll('.options label').forEach(l => l.classList.remove('correct', 'incorrect'));
+  document.querySelectorAll('.question').forEach(q => q.classList.remove('answered', 'wrong'));
+  document.querySelectorAll('.answer').forEach(a => a.classList.remove('show'));
+  answeredCount = 0;
+  updateStats();
+}
+function updateStats() {
+  let count = 0;
+  document.querySelectorAll('.question.answered').forEach(q => count++);
+  document.querySelectorAll('.blank-input.correct').forEach(i => count++);
+  answeredCount = count;
+  document.getElementById('answeredCount').textContent = answeredCount;
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

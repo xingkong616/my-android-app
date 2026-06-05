@@ -1,20 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Hello World</string>
-    <string name="hello_title">Hello, World!</string>
-    <string name="hello_question">你今天过得怎么样？</string>
-    <string name="change_greeting">换一句</string>
-
-    <string-array name="greetings">
-        <item>你好，世界！🌍</item>
-        <item>Hello, World! 👋</item>
-        <item>今天也要加油哦！💪</item>
-        <item>代码跑起来了！✨</item>
-        <item>云端打包成功！☁️</item>
-        <item>你是第一位看到这句话的人！</item>
-        <item>Bonjour le monde! 🇫🇷</item>
-        <item>こんにちは、世界！🇯🇵</item>
-        <item>¡Hola, Mundo! 🇪🇸</item>
-        <item>Hallo, Welt! 🇩🇪</item>
-    </string-array>
+    <string name="app_name">物理八上练习题</string>
 </resources>

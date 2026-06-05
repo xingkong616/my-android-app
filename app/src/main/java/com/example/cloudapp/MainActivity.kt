@@ -1,36 +1,57 @@
 package com.example.cloudapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
+import android.view.View
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.ProgressBar
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var greetings: Array<String>
-    private var lastIndex: Int = -1
+    private lateinit var webView: WebView
+    private lateinit var progress: ProgressBar
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        greetings = resources.getStringArray(R.array.greetings)
+        webView = findViewById(R.id.webview)
+        progress = findViewById(R.id.progress)
 
-        val greetingView: TextView = findViewById(R.id.greeting)
-        val button: Button = findViewById(R.id.button)
+        webView.settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            useWideViewPort = true
+            loadWithOverviewMode = true
+            builtInZoomControls = true
+            displayZoomControls = false
+            textZoom = 100
+        }
 
-        showRandomGreeting(greetingView)
-        button.setOnClickListener { showRandomGreeting(greetingView) }
-    }
-
-    private fun showRandomGreeting(view: TextView) {
-        var idx = (greetings.indices).random()
-        if (greetings.size > 1) {
-            while (idx == lastIndex) {
-                idx = (greetings.indices).random()
+        webView.webViewClient = WebViewClient()
+        webView.webChromeClient = object : WebChromeClient() {
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                progress.progress = newProgress
+                progress.visibility = if (newProgress >= 100) View.GONE else View.VISIBLE
             }
         }
-        lastIndex = idx
-        view.text = greetings[idx]
+
+        webView.loadUrl("file:///android_asset/exercises.html")
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (webView.canGoBack()) {
+                    webView.goBack()
+                } else {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        })
     }
 }
