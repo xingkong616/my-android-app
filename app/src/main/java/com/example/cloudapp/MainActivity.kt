@@ -7,18 +7,30 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private var clickCount = 0
+    private lateinit var greetings: Array<String>
+    private var lastIndex: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val message: TextView = findViewById(R.id.message)
+        greetings = resources.getStringArray(R.array.greetings)
+
+        val greetingView: TextView = findViewById(R.id.greeting)
         val button: Button = findViewById(R.id.button)
 
-        button.setOnClickListener {
-            clickCount++
-            message.text = getString(R.string.click_count, clickCount)
+        showRandomGreeting(greetingView)
+        button.setOnClickListener { showRandomGreeting(greetingView) }
+    }
+
+    private fun showRandomGreeting(view: TextView) {
+        var idx = (greetings.indices).random()
+        if (greetings.size > 1) {
+            while (idx == lastIndex) {
+                idx = (greetings.indices).random()
+            }
         }
+        lastIndex = idx
+        view.text = greetings[idx]
     }
 }

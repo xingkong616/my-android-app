@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CloudApp</string>
-    <string name="hello_title">云端构建成功</string>
-    <string name="hello_message">这个 APK 由 GitHub Actions 在云端打包</string>
-    <string name="click_me">点我</string>
-    <string name="click_count">已点击 %1$d 次</string>
+    <string name="app_name">Hello World</string>
+    <string name="hello_title">Hello, World!</string>
+    <string name="hello_question">你今天过得怎么样？</string>
+    <string name="change_greeting">换一句</string>
+
+    <string-array name="greetings">
+        <item>你好，世界！🌍</item>
+        <item>Hello, World! 👋</item>
+        <item>今天也要加油哦！💪</item>
+        <item>代码跑起来了！✨</item>
+        <item>云端打包成功！☁️</item>
+        <item>你是第一位看到这句话的人！</item>
+        <item>Bonjour le monde! 🇫🇷</item>
+        <item>こんにちは、世界！🇯🇵</item>
+        <item>¡Hola, Mundo! 🇪🇸</item>
+        <item>Hallo, Welt! 🇩🇪</item>
+    </string-array>
 </resources>
