@@ -1,0 +1,41 @@
+{
+  "name": "Android Cloud Dev",
+  "image": "mcr.microsoft.com/devcontainers/java:17-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/android-sdk:1": {
+      "version": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "fwcd.kotlin",
+        "mathiasfrohlich.Kotlin",
+        "redhat.vscode-xml",
+        "naco-siren.gradle-language",
+        "GitHub.copilot-chat"
+      ],
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "files.eol": "\n"
+      }
+    }
+  },
+  "containerEnv": {
+    "ANDROID_HOME": "/usr/local/lib/android/sdk",
+    "ANDROID_SDK_ROOT": "/usr/local/lib/android/sdk",
+    "GRADLE_OPTS": "-Dorg.gradle.daemon=false -Xmx2048m"
+  },
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/usr/local/lib/android/sdk/platform-tools:/usr/local/lib/android/sdk/cmdline-tools/latest/bin"
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  "forwardPorts": [],
+  "remoteUser": "vscode"
+}

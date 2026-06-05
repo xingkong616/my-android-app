@@ -1,0 +1,23 @@
+# Default: treat all text files as auto-detected
+* text=auto eol=lf
+
+# Force LF (Unix) line endings for these (run on Linux)
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Force CRLF for Windows batch files
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.jar binary
+*.apk binary
+*.aab binary
+*.keystore binary
+*.jks binary

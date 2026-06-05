@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CloudApp</string>
+    <string name="hello_title">云端构建成功</string>
+    <string name="hello_message">这个 APK 由 GitHub Actions 在云端打包</string>
+    <string name="click_me">点我</string>
+    <string name="click_count">已点击 %1$d 次</string>
+</resources>
